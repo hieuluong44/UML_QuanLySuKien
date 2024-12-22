@@ -13,7 +13,7 @@ create table NguoiDung (
     TenCongTy nvarchar(100) null, 
     DiaChiCongTy nvarchar(200) null,
 	QuyDinh nvarchar(20) null check (QuyDinh in (N'Khách mời', N'Khách thường')),
-	LoaiNguoiDung nvarchar(20) not null check (LoaiNguoiDung in (N'Cá nhân', N'Công ty', N'Quản trị'))
+	LoaiNguoiDung nvarchar(20) null check (LoaiNguoiDung in (N'Cá nhân', N'Công ty', N'Quản trị'))
 );
 go
 
@@ -42,24 +42,43 @@ create table SuKien (
 	TrangThaiSuKien nvarchar(20) default N'Chờ xác nhận' check (TrangThaiSuKien in (N'Chờ xác nhận',N'Đã xác nhận' ,N'Chưa bắt đầu', N'Đang diễn ra', N'Hoàn thành', N'Hủy')));
 go
 
--- Bảng Vé
-create table Ve (
-    IDVe varchar(10) primary key not null,
-    IDSuKien varchar(10) not null foreign key references SuKien(IDSuKien),
-    LoaiVe nvarchar(10) not null,
-    GiaVe float default 0 not null,
-	ViTriNgoi nvarchar(10) null,
+-- Bảng loại vé
+create table LoaiVe (
+    IDLoaiVe varchar(10) primary key not null, 
+    LoaiVe nvarchar(50) not null check (LoaiVe in (N'Vé thường', N'Vé VIP')),
+    GiaVe decimal not null, 
+    UuDai nvarchar(100) null  
 );
 go
 
--- Bảng Thanh toán
-create table ThanhToan (
-    IDThanhToan varchar(10) primary key not null,
-    IDVe varchar(10) foreign key references Ve(IDVe) not null,
+-- Bảng Vé
+create table Ve (
+    IDVe varchar(10) primary key not null,
+    IDSuKien varchar(10) not null foreign key references SuKien(IDSuKien), 
+    IDLoaiVe varchar(10) not null foreign key references LoaiVe(IDLoaiVe),  
+    SoLuongCoSan int default 0 not null, 
+    TrangThai nvarchar(20) default N'Còn vé' check (TrangThai in (N'Còn vé', N'Hết vé', N'Hủy'))
+);
+go
+
+-- Bảng giao dịch
+create table GiaoDichThanhToan (
+    IDGiaoDich varchar(10) primary key not null,
     IDNguoiDung varchar(10) foreign key references NguoiDung(IDNguoiDung) not null,
+	TongSoVe int not null,
     NgayThanhToan datetime default getdate() not null,
-    TienThanhToan float default 0 not null,
+    TongTien decimal default 0 not null,
     TrangThai nvarchar(20) not null  check (TrangThai in (N'Chưa thanh toán', N'Đã thanh toán'))
+);
+go
+
+-- Bảng chi tiết giao dịch
+create table ChiTietGiaoDich (
+    IDChiTietGiaoDich varchar(10) primary key not null, 
+    IDGiaoDich varchar(10) foreign key references GiaoDichThanhToan(IDGiaoDich),  
+    IDVe varchar(10) foreign key references Ve(IDVe),  
+    SoLuong int not null, 
+    GiaTien decimal not null 
 );
 go
 
