@@ -197,7 +197,6 @@
 	<Type id="Class">
 		<Tab id="Attributes"/>
 		<Tab id="Operations"/>
-		<Tab id="Receptions"/>
 	</Type>
 	<Type id="Clause">
 		<Tab id="Body"/>
