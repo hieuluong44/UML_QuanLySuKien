@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ProjectTreeState projectID="qyNt1cmGAqACAgWp" projectPath="F:\hh\UML_QuanLySuKien\Bi\u1ec3u \u0111\u1ed3 Paradigm\UML_QuanLySuKien.vpp">
-	<TreeState name="ModelRepository" viewX="0" viewY="0">
+	<TreeState name="ModelRepository" viewX="0" viewY="864">
 		<ExpandedPath>ModelRepository</ExpandedPath>
 	</TreeState>
 	<TreeState name="DiagramNavigator" viewX="0" viewY="0">
 		<ExpandedPath>DiagramNavigator</ExpandedPath>
+		<ExpandedPath>DiagramNavigator,UML Diagrams</ExpandedPath>
+		<ExpandedPath>ClassDiagram</ExpandedPath>
+		<SelectedPath>ClassDiagram</SelectedPath>
 	</TreeState>
 	<TreeState name="ClassBrowser" viewX="0" viewY="0"/>
 	<TreeState name="LogicalView" viewX="0" viewY="0"/>
